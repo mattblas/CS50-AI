@@ -87,57 +87,30 @@ def main():
 
 
 def shortest_path(source, target):
-# Use Breadth-First Search
-
-    # Initialize frontier to just the starting position
-    start = Node(state=source, parent=None, action=None)
-    frontier = QueueFrontier()
-    frontier.add(start)
-
+    # Use Breadth-First Search
     explored = set()
-    # Keep looping until solution found
-    while True:
+    frontier = QueueFrontier()
+    initial_state = Node(state=source, parent=None, action=None)
+    frontier.add(initial_state)
 
-        # If nothing left in frontier, then no path
+    while True:
         if frontier.empty():
             raise Exception("no solution")
-
-        # Choose a node from the frontier
         node = frontier.remove()
 
-        # If node is the goal, then we have a solution
         if node.state == target:
             actions = []
-
             while node.parent is not None:
                 actions.append((node.action, node.state))
                 node = node.parent
-
             actions.reverse()
-            return actions
-
-        # Mark node as explored
+            return (actions)
         explored.add(node.state)
-
-        # Add neighbors to frontier
-        n = neighbors_for_person(node.state)
-        for action, state in n:
+        for action, state in neighbors_for_person(node.state):
             if not frontier.contains_state(state) and state not in explored:
                 child = Node(state=state, parent=node, action=action)
-                if child == target:
-                    actions = []
-
-                    while child.parent is not None:
-                        actions.append(child.action, child.state)
-                        child == child.parent
-
-                    actions.reverse()
-                    return actions
                 frontier.add(child)
 
-
-        # ---> Tak powinna wyglądać wartość ---> return solution = [("104257", "158")]     
-    
 
 def person_id_for_name(name):
     """
