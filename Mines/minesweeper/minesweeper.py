@@ -103,35 +103,62 @@ class Sentence():
         return f"{self.cells} = {self.count}"
 
     def known_mines(self):
-        #TODO
+        #TODO - DONE
         """
         Returns the set of all cells in self.cells known to be mines.
         """
-        raise NotImplementedError
+        mines = set()
+        if len(self.cells) == self.count:
+            mines = self.cells
+        return mines
 
     def known_safes(self):
-        #TODO
+        #TODO DONE
         """
         Returns the set of all cells in self.cells known to be safe.
         """
-        raise NotImplementedError
+        safe = set()
+        if self.count == 0:
+            safe = self.cells
+        return safe
 
     def mark_mine(self, cell):
-        #TODO
+        #TODO DONE
         """
         Updates internal knowledge representation given the fact that
         a cell is known to be a mine.
+        
+        The mark_mine function should first check to see if cell is one of the cells included in the sentence.
+            
+            > If cell is in the sentence, the function should update the sentence so that cell is no longer 
+            in the sentence, but still represents a logically correct sentence given that cell is known
+            to be a mine.
+            
+            > If cell is not in the sentence, then no action is necessary.
         """
-        raise NotImplementedError
+        if cell in self.cells:
+            print(f"before: {self.cells}, {self.count}, {cell}")
+            self.cells.remove(cell)
+            self.count = self.count - 1
+            print(f"after {self.cells}, {self.count}")
 
     def mark_safe(self, cell):
-        #TODO
+        #TODO DONE
         """
         Updates internal knowledge representation given the fact that
         a cell is known to be safe.
-        """
-        raise NotImplementedError
 
+        The mark_safe function should first check to see if cell is one of the cells included in the sentence.
+            
+            >If cell is in the sentence, the function should update the sentence so that cell is no longer in
+            the sentence, but still represents a logically correct sentence given that cell is known to be safe.
+            
+            >If cell is not in the sentence, then no action is necessary.
+        """
+        if cell in self.cells:
+            print(f"before: {self.cells}, {self.count}, {cell}")
+            self.cells.remove(cell)
+            print(f"after: {self.cells}, {self.count}")
 
 class MinesweeperAI():
     """
@@ -215,3 +242,26 @@ class MinesweeperAI():
             2) are not known to be mines
         """
         raise NotImplementedError
+
+
+class Tests():
+    def test_known_mines():
+        print(f"Known mines: Returns the set of all cells in self.cells known to be mines.")
+        print(Sentence(cells=((3,4), (4,5)), count=2).known_mines())
+
+    def test_known_safes():
+        print(f"Known safes: Returns the set of all cells in self.cells known to be safe.")
+        print(Sentence(cells=((3,4), (4,5)), count=0).known_safes())
+
+    def test_mark_mine():
+        print(f"Mark mine: Updates internal knowledge representation given the fact that a cell is known to be a mine.")
+        Sentence(cells=((3,4), (4,5)), count=2).mark_mine(cell=((4,5)))
+
+    def test_mark_safe():
+        print(f"Mark safe: Updates internal knowledge representation given the fact that a cell is known to be safe.")
+        Sentence(cells=((3,4), (4,5)), count=2).mark_safe(cell=((4,5)))
+
+Tests.test_known_mines()
+Tests.test_known_safes()
+Tests.test_mark_mine()
+Tests.test_mark_safe()
