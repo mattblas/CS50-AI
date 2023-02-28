@@ -85,6 +85,7 @@ class Minesweeper():
 
 
 class Sentence():
+    #TODO
     """
     Logical statement about a Minesweeper game
     A sentence consists of a set of board cells,
@@ -102,18 +103,21 @@ class Sentence():
         return f"{self.cells} = {self.count}"
 
     def known_mines(self):
+        #TODO
         """
         Returns the set of all cells in self.cells known to be mines.
         """
         raise NotImplementedError
 
     def known_safes(self):
+        #TODO
         """
         Returns the set of all cells in self.cells known to be safe.
         """
         raise NotImplementedError
 
     def mark_mine(self, cell):
+        #TODO
         """
         Updates internal knowledge representation given the fact that
         a cell is known to be a mine.
@@ -121,6 +125,7 @@ class Sentence():
         raise NotImplementedError
 
     def mark_safe(self, cell):
+        #TODO
         """
         Updates internal knowledge representation given the fact that
         a cell is known to be safe.
@@ -173,18 +178,24 @@ class MinesweeperAI():
         safe cell, how many neighboring cells have mines in them.
 
         This function should:
+        TODO
             1) mark the cell as a move that has been made
+        TODO
             2) mark the cell as safe
+        TODO
             3) add a new sentence to the AI's knowledge base
                based on the value of `cell` and `count`
+        TODO
             4) mark any additional cells as safe or as mines
                if it can be concluded based on the AI's knowledge base
+        TODO
             5) add any new sentences to the AI's knowledge base
                if they can be inferred from existing knowledge
         """
         raise NotImplementedError
 
     def make_safe_move(self):
+        #TODO
         """
         Returns a safe cell to choose on the Minesweeper board.
         The move must be known to be safe, and not already a move
@@ -196,6 +207,7 @@ class MinesweeperAI():
         raise NotImplementedError
 
     def make_random_move(self):
+        #TODO
         """
         Returns a move to make on the Minesweeper board.
         Should choose randomly among cells that:
